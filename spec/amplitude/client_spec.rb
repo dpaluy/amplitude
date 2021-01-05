@@ -17,8 +17,8 @@ describe Amplitude::Client do
         blk = lambda do |req|
           expect(req.body).to match(api.merge(body))
         end
-        stub_request(:post, "http://localhost:8088/mock/#{service}").with(&blk).
-          to_return(status: 200, body: '{"id": "123456"}')
+        stub_request(:post, "http://localhost:8088/mock/#{service}").with(&blk)
+          .to_return(status: 200, body: '{"id": "123456"}')
 
         response = client.post(service, body, basic_auth: false)
         expect(response.status).to eql(200)
@@ -27,9 +27,31 @@ describe Amplitude::Client do
       it '#get' do
         params = { id: '1' }
         path = [service, api.merge(params).to_query].join('?')
-        stub_request(:get, "http://localhost:8088/mock/#{path}").
-          to_return(status: 200, body: body.to_json)
+        stub_request(:get, "http://localhost:8088/mock/#{path}")
+          .to_return(status: 200, body: body.to_json)
         response = client.get(service, params, basic_auth: false)
+        expect(response.status).to eql(200)
+      end
+    end
+
+    context 'with basic auth' do
+      it '#post' do
+        blk = lambda do |req|
+          expect(req.body).to match(body)
+        end
+        stub_request(:post, "http://localhost:8088/mock/#{service}").with(&blk)
+          .to_return(status: 200, body: '{"id": "123456"}')
+
+        response = client.post(service, body, basic_auth: true)
+        expect(response.status).to eql(200)
+      end
+
+      it '#get' do
+        params = { id: '1' }
+        path = [service, params.to_query].join('?')
+        stub_request(:get, "http://localhost:8088/mock/#{path}")
+          .to_return(status: 200, body: body.to_json)
+        response = client.get(service, params, basic_auth: true)
         expect(response.status).to eql(200)
       end
     end
@@ -45,7 +67,7 @@ describe Amplitude::Client do
         Amplitude.configure do |config|
           config.key      = 'mylogin'
           config.secret   = 'mypassword'
-          config.endpoint = "http://google.com"
+          config.endpoint = 'https://google.com'
         end
       end
 
