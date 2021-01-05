@@ -1,8 +1,5 @@
 require 'amplitude/config'
 require 'amplitude/client'
-require 'amplitude/api_connection'
-require 'amplitude/lead'
-require 'amplitude/activity'
 require 'amplitude/invalid_request_error'
 require 'amplitude/engine' if defined?(Rails)
 

@@ -17,18 +17,18 @@ module Amplitude
       raise ArgumentError, 'Amplitude key or secret are missing' unless @secret && @key
     end
 
-    def post(url, body = {}, basic_auth: false)
+    def post(url, body = {}, basic_auth:)
       conn = connection(basic_auth)
-      merged_body = basic_auth ? body : { api_key: @key }.merge(body)
+      merged_body = basic_auth ? body : { api_key: key }.merge(body)
       conn.post(url) do |req|
         req.headers = HEADERS
         req.body    = merged_body
       end
     end
 
-    def get(url, params = {}, basic_auth: false)
+    def get(url, params = {}, basic_auth:)
       conn = connection(basic_auth)
-      merged_params = basic_auth ? params : { api_key: @key }.merge(params)
+      merged_params = basic_auth ? params : { api_key: key }.merge(params)
       conn.get(url) do |req|
         req.headers = HEADERS
         req.params  = merged_params

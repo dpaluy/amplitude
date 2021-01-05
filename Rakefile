@@ -16,8 +16,8 @@ Juwelier::Tasks.new do |gem|
   gem.name = 'amplitude'
   gem.homepage = 'http://github.com/dpaluy/amplitude'
   gem.license = 'MIT'
-  gem.summary = %Q[amplitude ruby wrapper]
-  gem.description = %Q[amplitude ruby wrapper]
+  gem.summary = 'Amplitude API Ruby wrapper'
+  gem.description = 'Ruby gem for integration with Amplitude Analytics. Amplitude API: https://developers.amplitude.com/docs'
   gem.email = 'dpaluy@gmail.com'
   gem.authors = ['dpaluy']
 

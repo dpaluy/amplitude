@@ -5,10 +5,11 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'rspec'
-require 'leadsquared'
+require 'amplitude'
 require 'byebug'
 require 'webmock/rspec'
 require 'timecop'
+require 'active_support/core_ext/hash'
 
 if ENV['COVERAGE']
   SimpleCov.start do

@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'activesupport'
 gem 'faraday', '~> 1.3.0'
 
 group :development do
@@ -10,4 +11,8 @@ group :development do
   gem 'rdoc', '~> 3.12'
   gem 'rspec', '~> 3.5.0'
   gem 'simplecov'
+  gem 'timecop'
+  gem 'webmock'
+
+  gem 'codeclimate-test-reporter', require: nil
 end
