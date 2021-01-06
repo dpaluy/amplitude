@@ -16,6 +16,10 @@ Amplitude.configure do |config|
 end
 ```
 
+### Event Tracking
+
+See the list of a arguments for details: https://developers.amplitude.com/docs/http-api-v2#keys-for-the-event-argument
+
 ## Contributing to amplitude
 
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.

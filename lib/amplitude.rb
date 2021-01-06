@@ -1,8 +1,9 @@
 require 'extensions/hash'
 
+require 'amplitude/api_connection'
 require 'amplitude/config'
 require 'amplitude/client'
-require 'amplitude/identity'
+require 'amplitude/event'
 require 'amplitude/invalid_request_error'
 require 'amplitude/engine' if defined?(Rails)
 

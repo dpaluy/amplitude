@@ -1,11 +1,16 @@
 require 'logger'
+require 'yaml'
 
 module Amplitude
   class Config
-    attr_accessor :key, :secret, :endpoint, :logger
+    attr_accessor :key, :secret, :endpoint, :enabled
 
     def logger
       @logger ||= Logger.new(STDERR)
+    end
+
+    def event_keys
+      @event_keys ||= YAML.load_file('lib/config/event_keys.yml')
     end
   end
 

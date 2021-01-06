@@ -1,7 +1,9 @@
 module Amplitude
-  class Identify
-    URL = 'identify'
+  class Identify < ApiConnection
+    URL = 'identify'.freeze
 
-
+    def identify!(identity)
+      client
+    end
   end
 end

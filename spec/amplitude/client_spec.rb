@@ -1,15 +1,42 @@
 require 'spec_helper'
 
 describe Amplitude::Client do
-  let(:client) { Amplitude::Client.new('token', 'pass', 'http://localhost:8088/mock') }
   let(:service) { 'service1' }
+  let(:params)  do
+    { id: '1' }
+  end
+
+  let(:body) do
+    { key1: 'value1', key2: 'value2' }
+  end
+
+  describe 'Disable connection' do
+    before do
+      Amplitude.configure {|c| c.enabled = false }
+    end
+
+    after do
+      Amplitude.configure {|c| c.enabled = true }
+    end
+
+    let(:client) { Amplitude::Client.new(key: 'token', secret: 'pass') }
+
+    it 'skip post' do
+      response = client.post(service, body, basic_auth: false)
+      expect(response).to be_nil
+    end
+
+    it 'skip get' do
+      response = client.get(service, params, basic_auth: false)
+      expect(response).to be_nil
+    end
+  end
 
   describe 'Valid Request' do
+    let(:client) { Amplitude::Client.new(key: 'token', secret: 'pass', endpoint: 'http://localhost:8088/mock') }
+
     let(:api) do
       { api_key: 'token' }
-    end
-    let(:body) do
-      { key1: 'value1', key2: 'value2' }
     end
 
     context 'without basic auth' do
@@ -25,7 +52,6 @@ describe Amplitude::Client do
       end
 
       it '#get' do
-        params = { id: '1' }
         path = [service, api.merge(params).to_query].join('?')
         stub_request(:get, "http://localhost:8088/mock/#{path}")
           .to_return(status: 200, body: body.to_json)
@@ -47,7 +73,6 @@ describe Amplitude::Client do
       end
 
       it '#get' do
-        params = { id: '1' }
         path = [service, params.to_query].join('?')
         stub_request(:get, "http://localhost:8088/mock/#{path}")
           .to_return(status: 200, body: body.to_json)
