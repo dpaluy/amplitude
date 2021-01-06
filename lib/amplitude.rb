@@ -1,6 +1,7 @@
 require 'extensions/hash'
 
-require 'amplitude/api_connection'
+require 'amplitude/api/base'
+require 'amplitude/api/events'
 require 'amplitude/config'
 require 'amplitude/client'
 require 'amplitude/event'

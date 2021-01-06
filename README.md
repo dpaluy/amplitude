@@ -12,7 +12,6 @@ You just need to provide the authentication details in you configuration, and yo
 Amplitude.configure do |config|
   config.key    = 'mylogin'
   config.secret = 'secret'
-  config.logger = Rails.logger
 end
 ```
 

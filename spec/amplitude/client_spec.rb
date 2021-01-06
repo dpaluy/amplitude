@@ -12,11 +12,11 @@ describe Amplitude::Client do
 
   describe 'Disable connection' do
     before do
-      Amplitude.configure {|c| c.enabled = false }
+      Amplitude.configure { |c| c.enabled = false }
     end
 
     after do
-      Amplitude.configure {|c| c.enabled = true }
+      Amplitude.configure { |c| c.enabled = true }
     end
 
     let(:client) { Amplitude::Client.new(key: 'token', secret: 'pass') }
