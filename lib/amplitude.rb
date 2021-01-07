@@ -2,6 +2,7 @@ require 'extensions/hash'
 
 require 'amplitude/api/base'
 require 'amplitude/api/events'
+require 'amplitude/api/users'
 require 'amplitude/config'
 require 'amplitude/client'
 require 'amplitude/event'

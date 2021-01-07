@@ -83,8 +83,17 @@ describe Amplitude::Client do
   end
 
   describe 'Configuration' do
-    it 'requires token and secret' do
-      expect { Amplitude::Client.new }.to raise_error(ArgumentError)
+    describe 'not set' do
+      before do
+        Amplitude.configure do |config|
+          config.key      = nil
+          config.secret   = nil
+        end
+      end
+
+      it 'requires token and secret' do
+        expect { Amplitude::Client.new }.to raise_error(ArgumentError)
+      end
     end
 
     describe 'preset' do
